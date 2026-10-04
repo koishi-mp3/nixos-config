@@ -3,7 +3,7 @@
 {
   
   home.username = "cirno";
-  home.homeDirectory = "/home/kirno";
+  home.homeDirectory = "/home/cirno";
   home.stateVersion = "26.05";
   
   home.packages = with pkgs; [
@@ -18,7 +18,7 @@
     filezilla
  
     #games 
-    osu-lazer
+    osu-lazer-bin
     prismlauncher
 
 
@@ -28,6 +28,8 @@
     neovim
     git
     putty	
+    pywal16
+    pywalfox-native
 
   ];
 }
