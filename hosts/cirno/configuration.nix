@@ -9,6 +9,9 @@
       ./hardware-configuration.nix
     ];
 
+
+  hardware.nvidia.enable = true;
+  services.hardware.openrgb.enable = true;
   # NordVPN configuration
   custom.services.nordvpn.enable = true;
   users.groups.nordvpn.members = ["cirno"];
@@ -57,6 +60,8 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.flatpak.enable = true;
+
 
 
   # Enable CUPS to print documents.
@@ -70,7 +75,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
+}; 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."cirno" = {
     isNormalUser = true;
@@ -111,6 +116,7 @@
   nerd-fonts.droid-sans-mono
   nerd-fonts.jetbrains-mono
   font-awesome
+  jetbrains-mono
 ];
 
   system.stateVersion = "26.05"; # Did you read the comment?
