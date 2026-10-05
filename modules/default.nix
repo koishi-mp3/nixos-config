@@ -2,5 +2,6 @@
   imports = [
     ./hardware/nvidia.nix
    ./services/nordvpn.nix 
+   ./services/nas.nix
   ];
 }

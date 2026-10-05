@@ -5,9 +5,15 @@
   home.username = "cirno";
   home.homeDirectory = "/home/cirno";
   home.stateVersion = "26.05";
-  
+
+  services.arrpc = {  
+    enable = true;
+    package = pkgs.arrpc;
+    systemdTarget = "graphical-session.target";
+  };
+
   home.packages = with pkgs; [
-    #misc
+    # misc
     vesktop
     firefox
     btop
@@ -16,13 +22,14 @@
     thunar
     blueman
     filezilla
+    qbittorrent
+    
  
-    #games 
+    # games 
     osu-lazer-bin
     prismlauncher
 
-
-    #terminal
+    # terminal
     fastfetch
     ghostty
     neovim
@@ -30,6 +37,5 @@
     putty	
     pywal16
     pywalfox-native
-
   ];
-}
+}  

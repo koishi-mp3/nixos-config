@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, agenix, ... }:
 
 {
   imports =
@@ -10,8 +10,10 @@
     ];
 
 
+  # Nvidia and openrgb
   hardware.nvidia.enable = true;
   services.hardware.openrgb.enable = true;
+
   # NordVPN configuration
   custom.services.nordvpn.enable = true;
   users.groups.nordvpn.members = ["cirno"];
@@ -57,10 +59,23 @@
   };
 
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  #Plasma 6
   services.desktopManager.plasma6.enable = true;
+
+  # SDDM (wayland)
+  services.displayManager.sddm = {
+	enable = true;
+
+	wayland = {
+	enable = true;
+	};
+  };
+  
+  #flatpak
   services.flatpak.enable = true;
+  
+  #For gtk
+  programs.dconf.enable = true;
 
 
 
@@ -111,6 +126,9 @@
   };
 };
 
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
   fonts.packages = with pkgs; [
   nerd-fonts.fira-code
   nerd-fonts.droid-sans-mono
@@ -119,7 +137,11 @@
   jetbrains-mono
 ];
 
+  age.identityPaths = [ "/home/cirno/.ssh/id_ed25519" ];
+
   system.stateVersion = "26.05"; # Did you read the comment?
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes"];
+
 }
