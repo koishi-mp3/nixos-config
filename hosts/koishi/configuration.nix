@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, agenix, ... }:
 
 {
   imports =
@@ -98,6 +98,9 @@
 ];
 
   
+
+  
+  age.identityPaths = [ "/home/koishi/.ssh/id_ed25519" ];
   system.stateVersion = "26.05";
 
   #setup for my friend's nvim plugin
