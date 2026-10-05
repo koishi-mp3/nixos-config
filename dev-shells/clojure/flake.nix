@@ -1,0 +1,58 @@
+{
+  description = "A Nix-flake-based Clojure development environment";
+
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1"; # unstable Nixpkgs
+
+  outputs =
+    { self, ... }@inputs:
+
+    let
+      javaVersion = 25; # Change this value to update the whole stack
+
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem =
+        f:
+        inputs.nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            inherit system;
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [ inputs.self.overlays.default ];
+            };
+          }
+        );
+    in
+    {
+      overlays.default =
+        final: prev:
+        let
+          jdk = prev."jdk${toString javaVersion}";
+        in
+        {
+          boot = prev.boot.override { inherit jdk; };
+          clojure = prev.clojure.override { inherit jdk; };
+          leiningen = prev.leiningen.override { inherit jdk; };
+        };
+
+      devShells = forEachSupportedSystem (
+        { pkgs, system }:
+        {
+          default = pkgs.mkShellNoCC {
+            packages = with pkgs; [
+              boot
+              clojure
+              leiningen
+              self.formatter.${system}
+            ];
+          };
+        }
+      );
+
+      formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
+    };
+}
