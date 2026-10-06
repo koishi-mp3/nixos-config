@@ -24,6 +24,13 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/harddrive" = 
+  {
+     device = "/dev/disk/by-uuid/42FA9C14FA9C05F7";
+     fsType = "ntfs-3g";
+     options = [ "rw" "uid=1000" "gid=100" "umask=007" "nofail" ];
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
