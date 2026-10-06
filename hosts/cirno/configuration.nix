@@ -24,7 +24,7 @@
     steam.enable = true;
     proton.enable = true;
     slippi.enable = true;
-
+    dolphinemu.enable = true;
   };
  
   chimera.cooling.OpenLinkHub = {
