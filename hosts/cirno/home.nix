@@ -28,6 +28,7 @@
     # games 
     osu-lazer-bin
     prismlauncher
+    oversteer
 
     # terminal
     fastfetch
