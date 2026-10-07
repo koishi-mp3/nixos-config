@@ -9,7 +9,6 @@
       ./hardware-configuration.nix
     ];
 
-
   # Nvidia and openrgb
   hardware.nvidia.enable = true;
   services.hardware.openrgb.enable = true;
@@ -32,6 +31,10 @@
     package = pkgs.openlinkhub;
     config = ../../config/openlinkhub-config.json;
   };
+
+  #udev rules for oversteer
+  services.udev.packages = with pkgs; [ oversteer ]; 
+
 
   networking.hostName = "blahaj"; 
 
