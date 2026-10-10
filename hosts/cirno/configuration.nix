@@ -13,13 +13,6 @@
   hardware.nvidia.enable = true;
   services.hardware.openrgb.enable = true;
 
-  #temp delete later
-  swapDevices = [{
-  device = "/var/lib/swapfile";
-  size = 16*1024; # 16 GiB
-}];
-
-
   # NordVPN configuration
   custom.services.nordvpn.enable = true;
   users.groups.nordvpn.members = ["cirno"];
@@ -39,8 +32,11 @@
     config = ../../config/openlinkhub-config.json;
   };
 
-  #udev rules for oversteer
-  services.udev.packages = with pkgs; [ oversteer ]; 
+  #udev rules for oversteer and slimevr
+  services.udev.packages = with pkgs; [ oversteer slimevr ];
+
+  #pnpm package for slimevr
+  nixpkgs.config.permittedInsecurePackages = ["pnpm-9.15.9" ];  
 
 
   networking.hostName = "blahaj"; 
@@ -139,6 +135,11 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+
+  # Enable the firewall
+  networking.firewall.enable = true;
+  networking.firewall.allowedUDPPorts = [ 6969 ]; 
+ 
   fonts.packages = with pkgs; [
   nerd-fonts.fira-code
   nerd-fonts.droid-sans-mono
