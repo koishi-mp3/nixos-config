@@ -23,12 +23,14 @@
     blueman
     filezilla
     qbittorrent
+    vlc
     
  
     # games 
     osu-lazer-bin
     prismlauncher
     oversteer
+    slimevr
 
     # terminal
     fastfetch
