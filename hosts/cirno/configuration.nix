@@ -13,6 +13,13 @@
   hardware.nvidia.enable = true;
   services.hardware.openrgb.enable = true;
 
+  #temp delete later
+  swapDevices = [{
+  device = "/var/lib/swapfile";
+  size = 16*1024; # 16 GiB
+}];
+
+
   # NordVPN configuration
   custom.services.nordvpn.enable = true;
   users.groups.nordvpn.members = ["cirno"];
