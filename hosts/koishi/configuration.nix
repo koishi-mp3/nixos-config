@@ -13,8 +13,6 @@
 
   networking.hostName = "nixstrogen"; 
 
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -41,31 +39,15 @@
 };
 
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."koishi" = {
     isNormalUser = true;
     description = "";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      openrgb-with-all-plugins
+      
     ];
   };
-  services.hardware.openrgb.enable = true;
 
   programs.hyprland.enable = true;
   
@@ -74,21 +56,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest; 
   
-  #bluetooth 
-  hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true;
-  settings = {
-    General = {
-      Experimental = true;
-     FastConnectable = true;
-    };
-    Policy = {
-      AutoEnable = true;
-    };
-  };
-};
-
 
   fonts.packages = with pkgs; [
   nerd-fonts.fira-code
