@@ -9,6 +9,7 @@
       ./hardware-configuration.nix
     ];
 
+
   # Nvidia and openrgb
   hardware.nvidia.enable = true;
   services.hardware.openrgb.enable = true;
@@ -26,6 +27,9 @@
     dolphinemu.enable = true;
   };
  
+  #VR gaming 
+  services.wivrn.enable = true;
+
   chimera.cooling.OpenLinkHub = {
     enable = true;
     package = pkgs.openlinkhub;
@@ -42,10 +46,6 @@
   networking.hostName = "blahaj"; 
 
   
- 
- # Enable networking
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -77,26 +77,10 @@
 	};
   };
   
-  #flatpak
-  services.flatpak.enable = true;
   
   #For gtk
   programs.dconf.enable = true;
 
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-}; 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."cirno" = {
     isNormalUser = true;
@@ -117,28 +101,6 @@
  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
   
 
-
-  hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true;
-  settings = {
-    General = {
-      Experimental = true;
-      FastConnectable = true;
-    };
-    Policy = {
-      AutoEnable = true;
-    };
-  };
-};
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-
-  # Enable the firewall
-  networking.firewall.enable = true;
-  networking.firewall.allowedUDPPorts = [ 6969 ]; 
  
   fonts.packages = with pkgs; [
   nerd-fonts.fira-code
