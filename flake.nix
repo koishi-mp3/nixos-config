@@ -18,9 +18,12 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-xr = {
+      url = "github:nix-community/nixpkgs-xr";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nixpkgs-xr, ... }: {
     nixosConfigurations.nixstrogen = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -44,11 +47,12 @@
         ./hosts/cirno/configuration.nix
 	home-manager.nixosModules.home-manager
 	agenix.nixosModules.default
+	nixpkgs-xr.nixosModules.nixpkgs-xr
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.cirno = import ./hosts/cirno/home.nix;
+          home-manager.users.cirno = import ./hosts/cirno/home.nix; 
         }
         {
           nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
