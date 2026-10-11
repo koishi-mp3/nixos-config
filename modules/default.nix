@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
-    ./hardware/nvidia.nix
-   ./services/nordvpn.nix 
-   ./services/nas.nix
+    ./hardware/nvidia.nix 
+   ./services/default.nix
+   ./networking/default.nix
   ];
 }
